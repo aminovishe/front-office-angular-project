@@ -9,12 +9,13 @@ import {Utils} from '../shared/utils';
 })
 export class FullLayoutComponent implements OnInit {
   subMenuItems: NavigationMain[] = [];
+  currentRoute = this.router.url;
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.initializeNavBar();
-    this.changeActiveUrl(this.router.url);
+    this.changeActiveUrl(this.currentRoute);
     Utils.initializeClickNavBar(50);
   }
 
