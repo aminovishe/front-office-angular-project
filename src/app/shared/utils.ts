@@ -40,7 +40,7 @@ export class Utils {
       (rv[x[key]] = rv[x[key]] || []).push(x);
       return rv;
     }, {});
-  };
+  }
 
   static initializeDataTables(timeout: number, columnNumber: number, classdata: string) {
     // Basic datatable
@@ -52,17 +52,55 @@ export class Utils {
       tableListStation.DataTable({
            dom: 'Bfrtip',
             language: {
-              "emptyTable": "..."
+              'emptyTable': '...'
             },
         buttons: [
-          { extend: 'copyHtml5', footer: true, className:'btn'},
-          { extend: 'excelHtml5', footer: true, className:'btn'},
-          { extend: 'print', footer: true, className:'btn' },
-          { extend: 'pdfHtml5', footer: true, className:'btn' }
+          { extend: 'copyHtml5', footer: true, className: 'btn'},
+          { extend: 'excelHtml5', footer: true, className: 'btn'},
+          { extend: 'print', footer: true, className: 'btn' },
+          { extend: 'pdfHtml5', footer: true, className: 'btn' }
           ]
-        ,columnDefs: [{
+        , columnDefs: [{
           targets: [columnNumber - 1]
         }]
+      });
+    }, timeout);
+  }
+
+  static initializeSliders(timeout: number) {
+    // Basic datatable
+    setTimeout(function () {
+      jQuery(document).ready(function() {
+        jQuery('#slideshow').nivoSlider();
+        jQuery('#content .featured_carousel').flexslider({
+          animation: 'slide',
+          animationLoop: false,
+          slideshow: false,
+          itemWidth: 210,
+          minItems: 5, // use function to pull in initial value
+          maxItems: 5 // use function to pull in initial value
+        });
+        // tslint:disable-next-line:max-line-length
+        jQuery('#product-tab .featured_carousel_tab, #product-tab .latest_carousel_tab, #product-tab .bestseller_carousel_tab, #product-tab .special_carousel_tab').flexslider({
+          animation: 'slide',
+          animationLoop: false,
+          slideshow: false,
+          itemWidth: 210,
+          minItems: 5,
+          maxItems: 5,
+          start: function() {
+            jQuery('#product-tab .tab_content').addClass('deactive');
+            jQuery('#product-tab .tab_content:first').removeClass('deactive');
+          } });
+        jQuery('ul#tabs li:first').addClass('active').show();
+        jQuery('ul#tabs li').click(function() {
+          jQuery('ul#tabs li').removeClass('active');
+          jQuery(this).addClass('active');
+          jQuery('#product-tab .tab_content').hide();
+          const activeTab = jQuery(this).find('a').attr('href');
+          jQuery(activeTab).fadeIn();
+          return false;
+        });
       });
     }, timeout);
   }

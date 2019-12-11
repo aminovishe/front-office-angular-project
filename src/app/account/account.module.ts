@@ -1,18 +1,16 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {SharedModule} from '../shared/shared.module';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
-import {AccountRouting} from './account.routing';
-import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import { AccountRouting } from './account.routing';
+import { AccountComponent } from './account.component';
+
 
 @NgModule({
   imports: [
     AccountRouting,
-    CommonModule,
-    FormsModule,
-    HttpClientModule
+    SharedModule,
   ],
-  declarations: [RegisterComponent, LoginComponent]
+  declarations: [RegisterComponent, LoginComponent, AccountComponent]
 })
 export class AccountModule { }
