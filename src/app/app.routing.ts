@@ -3,6 +3,9 @@ import {RouterModule, Routes} from '@angular/router';
 import {FullLayoutComponent} from './full-layout/full-layout.component';
 import {AccountModule} from './account/account.module';
 import {HomeModule} from './home/home.module';
+import {LoginComponent} from './account/login/login.component';
+import {RegisterComponent} from './account/register/register.component';
+import {AccountComponent} from './account/account.component';
 
 export function loadHomeModule() {
   return HomeModule;
@@ -22,7 +25,17 @@ export const routes: Routes = [
       },
       {
         path: 'account',
-        loadChildren: loadAccountModule
+        component: AccountComponent,
+        children: [
+          {
+            path: 'login',
+            component: LoginComponent,
+          },
+          {
+            path: 'register',
+            component: RegisterComponent
+          }
+        ]
       }
     ]
   }
