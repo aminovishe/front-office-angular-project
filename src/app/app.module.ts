@@ -18,7 +18,7 @@ import {AccountModule} from './account/account.module';
 @NgModule({
   declarations: [
     AppComponent,
-    FullLayoutComponent
+    FullLayoutComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,23 +1,52 @@
 <!--Breadcrumb Part Start-->
-<div class="breadcrumb"> <a href="index.html">Home</a> » <a href="#">Account</a> » <a href="register.html">Register</a> </div>
+<div class="breadcrumb"><a href="index.html">Home</a> » <a href="#">Account</a> » <a href="register.html">Register</a>
+</div>
 <!--Breadcrumb Part End-->
 <h1>Register Account</h1>
-<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+<form (ngSubmit)="f.form.valid && onSubmit(f)" #f="ngForm">
   <h2>Your Personal Details</h2>
   <div class="content">
     <table class="form">
       <tbody>
       <tr>
         <td><span class="required">*</span> First Name:</td>
-        <td><input class="large-field" type="text" value="" name="firstname" [(ngModel)]="user.name"></td>
+        <td><input type="text" #name="ngModel" [(ngModel)]="user.name"
+                   [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" class="large-field" name="name" required>
+        </td>
+      </tr>
+      <tr *ngIf="f.submitted && name.invalid ">
+        <td class="error" colspan="2">
+          <div *ngIf="name.errors.required">
+            First Name is required.
+          </div>
+        </td>
       </tr>
       <tr>
         <td><span class="required">*</span> Last Name:</td>
-        <td><input class="large-field" type="text" value="" name="lastname" [(ngModel)]="user.lastname"></td>
+        <td><input type="text" #lastname="ngModel" [(ngModel)]="user.lastname" class="large-field" name="lastname"
+                   [ngClass]="{ 'is-invalid': f.submitted && lastname.invalid }" required></td>
+      </tr>
+      <tr *ngIf="f.submitted && lastname.invalid ">
+        <td class="error" colspan="2">
+          <div *ngIf="lastname.errors.required">
+            Last Name is required.
+          </div>
+        </td>
       </tr>
       <tr>
         <td><span class="required">*</span> E-Mail:</td>
-        <td><input class="large-field" type="text" value="" name="email" [(ngModel)]="user.email"></td>
+        <td><input type="text" #email="ngModel" [(ngModel)]="user.email" class="large-field" name="email"
+                   [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email></td>
+      </tr>
+      <tr *ngIf="f.submitted && email.invalid ">
+        <td class="error" colspan="2">
+          <div *ngIf="email.errors.required">
+            E-Mail is required.
+          </div>
+          <div *ngIf="email.errors.email">
+            E-Mail invalid.
+          </div>
+        </td>
       </tr>
       </tbody>
     </table>
@@ -28,11 +57,34 @@
       <tbody>
       <tr>
         <td><span class="required">*</span> Password:</td>
-        <td><input class="large-field" type="password" value="" name="password" [(ngModel)]="user.password"></td>
+        <td><input type="password" #password="ngModel" [(ngModel)]="user.password" class="large-field" name="password"
+                   [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="8"></td>
+      </tr>
+      <tr *ngIf="f.submitted && password.invalid ">
+        <td class="error" colspan="2">
+          <div *ngIf="password.errors.required">
+            Password is required.
+          </div>
+          <div *ngIf="password.errors.minlength">
+            Password must be at least 8 characters.
+          </div>
+        </td>
       </tr>
       <tr>
         <td><span class="required">*</span> Password Confirm:</td>
-        <td><input class="large-field" type="password" value="" name="confirm" [(ngModel)]="user.confirmPassword"></td>
+        <td><input type="password" #confirmPassword="ngModel" [(ngModel)]="user.confirmPassword" class="large-field"
+                   name="confirmPassword" [ngClass]="{ 'is-invalid': f.submitted && confirmPassword.invalid }" required
+                   comfirmMatchValidator="password"></td>
+      </tr>
+      <tr *ngIf="f.submitted && confirmPassword.invalid ">
+        <td class="error" colspan="2">
+          <div *ngIf="confirmPassword.errors.required">
+            Confirm Password is required.
+          </div>
+          <div *ngIf="f.submitted && confirmPassword.errors?.notEqual">
+            Passwords must match.
+          </div>
+        </td>
       </tr>
       </tbody>
     </table>

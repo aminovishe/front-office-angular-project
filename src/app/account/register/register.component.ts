@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {NgForm} from '@angular/forms';
+import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {User} from '../../shared/models/user';
 import {UserService} from '../../shared/services/user.service';
 import Swal from 'sweetalert2';
+import {SharedModule} from '../../shared/shared.module';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +14,7 @@ import Swal from 'sweetalert2';
 export class RegisterComponent implements OnInit {
 
   user = new User();
+  userForm;
 
   ngOnInit() {
   }
@@ -20,21 +22,12 @@ export class RegisterComponent implements OnInit {
   constructor(private userService: UserService, private route: ActivatedRoute) { }
 
   onSubmit(form: NgForm) {
-    if (Object.keys(this.user).length !== 5) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'All fields are required !!',
-      });
-    } else if (this.user.password !== this.user.confirmPassword) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'The passwords do not match !!',
-      });
-    } else {
+    Swal.fire({
+      icon: 'success',
+      title: 'Merci !!',
+      text: '',
+    });
       console.log(this.user);
-    }
   }
 
 }

@@ -5,6 +5,7 @@ import {StorageService} from './services/storage.service';
 import {MomentModule} from 'angular2-moment';
 import {NgBusyModule} from 'ng-busy';
 import {HttpClientModule} from '@angular/common/http';
+import {MustMatchValidatorDirective} from './must-match-validator.directive';
 
 
 @NgModule({
@@ -20,9 +21,12 @@ import {HttpClientModule} from '@angular/common/http';
     FormsModule,
     NgBusyModule,
     MomentModule,
-    HttpClientModule
+    HttpClientModule,
+    MustMatchValidatorDirective
   ],
-  declarations: [],
+  declarations: [
+    MustMatchValidatorDirective,
+  ],
   providers: [StorageService]
 })
 export class SharedModule {
