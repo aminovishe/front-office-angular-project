@@ -20,6 +20,6 @@ export class UserService {
 
   /** POST User */
   addUser (user: User) {
-    console.log(user);
+    return this.httpClient.post(this.userUrl, user);
   }
 }

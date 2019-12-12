@@ -22,12 +22,15 @@ export class RegisterComponent implements OnInit {
   constructor(private userService: UserService, private route: ActivatedRoute) { }
 
   onSubmit(form: NgForm) {
-    Swal.fire({
-      icon: 'success',
-      title: 'Merci !!',
-      text: '',
-    });
-      console.log(this.user);
+    this.userService.addUser(this.user)
+      .subscribe(response => {
+        if (response['success']) {
+          Swal.fire({icon: 'success', title: 'Merci !!', text: response['success']});
+        } else {
+          Swal.fire({icon: 'error', title: 'Erreur !!', text: response['error']});
+        }
+
+      });
   }
 
 }
