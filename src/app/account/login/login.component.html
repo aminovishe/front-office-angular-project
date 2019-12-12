@@ -8,19 +8,46 @@
     <div class="content">
       <p><b>Register Account</b></p>
       <p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>
-      <a class="button" href="#">Continue</a></div>
+      <a class="button" [routerLink]="'/account/register'">Continue</a></div>
   </div>
   <div class="right">
     <h2>Returning Customer</h2>
-    <form enctype="multipart/form-data" method="post" action="">
+    <form (ngSubmit)="f.form.valid && onSubmit(f)" #f="ngForm">
       <div class="content">
         <p>I am a returning customer</p>
         <b>E-Mail Address:</b><br>
-        <input type="text" value="" name="email">
+        <td><input type="text" #email="ngModel" [(ngModel)]="user.email" class="large-field" name="email"
+                   [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email></td>
         <br>
+        <table>
+          <tr *ngIf="f.submitted && email.invalid ">
+            <td class="error" colspan="2">
+              <div *ngIf="email.errors.required">
+                E-Mail is required.
+              </div>
+              <div *ngIf="email.errors.email">
+                E-Mail invalid.
+              </div>
+            </td>
+          </tr>
+        </table>
         <br>
         <b>Password:</b><br>
-        <input type="password" value="" name="password">
+        <td><input type="password" #password="ngModel" [(ngModel)]="user.password" class="large-field" name="password"
+                   [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="8"></td>
+        <br>
+        <table>
+          <tr *ngIf="f.submitted && password.invalid ">
+            <td class="error" colspan="2">
+              <div *ngIf="password.errors.required">
+                Password is required.
+              </div>
+              <div *ngIf="password.errors.minlength">
+                Password must be at least 8 characters.
+              </div>
+            </td>
+          </tr>
+        </table>
         <br>
         <a href="#">Forgotten Password</a><br>
         <br>
