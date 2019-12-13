@@ -6,14 +6,12 @@ import {CommonModule, HashLocationStrategy, LocationStrategy} from '@angular/com
 import {FormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app.routing';
 import {StorageService} from './shared/services/storage.service';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {SharedModule} from './shared/shared.module';
 import { FullLayoutComponent } from './full-layout/full-layout.component';
 import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
 import {AccountModule} from './account/account.module';
-
-
 
 @NgModule({
   declarations: [

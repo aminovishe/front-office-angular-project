@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import { Router } from '@angular/router';
 import {NgForm} from '@angular/forms';
 import Swal from 'sweetalert2';
 import {User} from '../../shared/models/user';
@@ -18,10 +19,16 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  constructor(private userService: UserService, private route: ActivatedRoute) { }
+  constructor(private userService: UserService,
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   onSubmit(form: NgForm) {
-    console.log(this.user);
+    this.userService.login(this.user)
+      .subscribe(response => {
+        localStorage.setItem('token', response.access_token);
+        this.router.navigate(['/']);
+      });
   }
 
 }

@@ -6,7 +6,7 @@ import {MomentModule} from 'angular2-moment';
 import {NgBusyModule} from 'ng-busy';
 import {HttpClientModule} from '@angular/common/http';
 import {MustMatchValidatorDirective} from './must-match-validator.directive';
-
+import {AuthGuard} from '../auth.guard';
 
 @NgModule({
   imports: [
@@ -27,7 +27,7 @@ import {MustMatchValidatorDirective} from './must-match-validator.directive';
   declarations: [
     MustMatchValidatorDirective,
   ],
-  providers: [StorageService]
+  providers: [StorageService, AuthGuard]
 })
 export class SharedModule {
 

@@ -6,6 +6,7 @@ import {HomeModule} from './home/home.module';
 import {LoginComponent} from './account/login/login.component';
 import {RegisterComponent} from './account/register/register.component';
 import {AccountComponent} from './account/account.component';
+import {AuthGuard} from './auth.guard';
 
 export function loadHomeModule() {
   return HomeModule;
@@ -21,7 +22,8 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: loadHomeModule
+        loadChildren: loadHomeModule,
+        canActivate: [AuthGuard]
       },
       {
         path: 'account',

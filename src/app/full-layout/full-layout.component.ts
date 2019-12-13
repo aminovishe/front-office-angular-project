@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Utils} from '../shared/utils';
+import {AuthGuard} from '../auth.guard';
 
 @Component({
   selector: 'app-full-layout',
@@ -10,8 +11,11 @@ import {Utils} from '../shared/utils';
 export class FullLayoutComponent implements OnInit {
   subMenuItems: NavigationMain[] = [];
   currentRoute = this.router.url;
+  isLoggedIn = !this.authGuard.canActivate();
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private authGuard: AuthGuard) { }
 
   ngOnInit() {
     this.initializeNavBar();
