@@ -18,7 +18,7 @@
         </div>
         <div class="links">
           <ng-container *ngFor="let item of subMenuItems" >
-            <a *ngIf="item.visible" [routerLink]="item.url">{{item.name}}</a>
+            <a *ngIf="item.visible && isLoggedIn" [routerLink]="item.url">{{item.name}}</a>
           </ng-container>
         </div>
       </div>

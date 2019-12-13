@@ -15,11 +15,21 @@ export class UserService {
 
   private readonly apiUrl = Config.baseUrl;
   private userUrl = this.apiUrl + '/user';
+  private loginUrl = this.apiUrl + '/auth/login';
 
   constructor(private httpClient: HttpClient) { }
 
   /** POST User */
   addUser (user: User) {
     return this.httpClient.post(this.userUrl, user);
+  }
+
+  /** login User */
+  login (user: User) {
+    return this.httpClient.post(this.loginUrl, user);
+  }
+
+  loggedIn() {
+    return !!localStorage.getItem('token');
   }
 }
