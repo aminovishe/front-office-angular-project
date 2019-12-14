@@ -21,8 +21,13 @@
                 <div class="image"><a href="#0"><img src="assets/image/product/lotto-sports-shoes-white-210x210.jpg" alt="Lotto Sports Shoes" /></a></div>
                 <div class="name"><a href="#0">{{ product.label }}</a></div>
                 <div class="price"> {{ product.price }} TND </div>
+                <div class="price"> {{ product.quantity }} unity </div>
                 <div class="cart">
-                  <input type="button" value="Add to Cart" class="button" />
+                  <form (ngSubmit)="f.form.valid && buyProd(f)" #f="ngForm" *ngIf="isLoggedIn === true">
+                    <input type="hidden" name="id" ngModel #id="ngModel" [(ngModel)]="product.id">
+                    <input type="number" name="quantity" placeholder="0" required ngModel #quantity="ngModel">
+                    <input type="submit" value="Buy" class="button" />
+                  </form>
                 </div>
                 <div class="clear"></div>
               </div>
