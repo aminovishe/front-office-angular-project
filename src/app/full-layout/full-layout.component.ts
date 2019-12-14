@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Utils} from '../shared/utils';
 import {AuthGuard} from '../auth.guard';
+import {UserService} from '../shared/services/user.service';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-full-layout',
@@ -15,7 +17,8 @@ export class FullLayoutComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private authGuard: AuthGuard) { }
+              private authGuard: AuthGuard,
+              private userService: UserService) { }
 
   ngOnInit() {
     this.initializeNavBar();
@@ -33,7 +36,7 @@ export class FullLayoutComponent implements OnInit {
       {
         name: 'Register',
         visible: true,
-        url: '/account/register'
+        url: '/account/register',
       }
     ];
   }
@@ -57,6 +60,15 @@ export class FullLayoutComponent implements OnInit {
         }
       }
     );
+  }
+
+  logout() {
+    this.userService.logout()
+      .subscribe(response => {
+        localStorage.removeItem('token');
+        this.router.navigate(['/']);
+        Swal.fire({icon: 'success', title: 'Good bye !!', text: ''});
+      });
   }
 }
 
