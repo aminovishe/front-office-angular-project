@@ -35,10 +35,6 @@ export const routes: Routes = [
             canActivate: [AuthGuard]
           },
           {
-            path: 'logout',
-            component: LogoutComponent
-          },
-          {
             path: 'register',
             component: RegisterComponent,
             canActivate: [AuthGuard]
