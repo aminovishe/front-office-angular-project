@@ -28,12 +28,20 @@ export class FullLayoutComponent implements OnInit {
       {
         name: 'Login',
         visible: true,
-        url: '/account/login'
+        url: '/account/login',
+        isLoggedIn: false
+      },
+      {
+        name: 'Logout',
+        visible: true,
+        url: '/account/logout',
+        isLoggedIn: true
       },
       {
         name: 'Register',
         visible: true,
-        url: '/account/register'
+        url: '/account/register',
+        isLoggedIn: false
       }
     ];
   }
@@ -66,6 +74,7 @@ export class NavigationMain {
   public childrens?: ChildrenNavigation[] = [];
   public url?: string;
   public visible?: boolean;
+  public isLoggedIn?: boolean;
   public numberAlertes?: number;
 }
 

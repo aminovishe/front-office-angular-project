@@ -7,6 +7,7 @@ import {LoginComponent} from './account/login/login.component';
 import {RegisterComponent} from './account/register/register.component';
 import {AccountComponent} from './account/account.component';
 import {AuthGuard} from './auth.guard';
+import {LogoutComponent} from './account/logout/logout.component';
 
 export function loadHomeModule() {
   return HomeModule;
@@ -22,8 +23,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: loadHomeModule,
-        canActivate: [AuthGuard]
+        loadChildren: loadHomeModule
       },
       {
         path: 'account',
@@ -32,10 +32,16 @@ export const routes: Routes = [
           {
             path: 'login',
             component: LoginComponent,
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'logout',
+            component: LogoutComponent
           },
           {
             path: 'register',
-            component: RegisterComponent
+            component: RegisterComponent,
+            canActivate: [AuthGuard]
           }
         ]
       }

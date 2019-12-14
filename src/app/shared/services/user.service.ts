@@ -16,6 +16,14 @@ export class UserService {
   private readonly apiUrl = Config.baseUrl;
   private userUrl = this.apiUrl + '/user';
   private loginUrl = this.apiUrl + '/auth/login';
+  private logoutUrl = this.apiUrl + '/auth/logout';
+
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    })
+  };
 
   constructor(private httpClient: HttpClient) { }
 
@@ -29,7 +37,16 @@ export class UserService {
     return this.httpClient.post(this.loginUrl, user);
   }
 
+  /** logout User */
+  logout () {
+    return this.httpClient.post(this.logoutUrl, {'token': this.getToken()}, this.httpOptions );
+  }
+
   loggedIn() {
     return !!localStorage.getItem('token');
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
   }
 }

@@ -4,6 +4,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AccountRouting } from './account.routing';
 import { AccountComponent } from './account.component';
+import { LogoutComponent } from './logout/logout.component';
 
 
 @NgModule({
@@ -11,6 +12,6 @@ import { AccountComponent } from './account.component';
     AccountRouting,
     SharedModule,
   ],
-  declarations: [RegisterComponent, LoginComponent, AccountComponent]
+  declarations: [RegisterComponent, LoginComponent, AccountComponent, LogoutComponent]
 })
 export class AccountModule { }
