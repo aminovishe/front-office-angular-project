@@ -51,7 +51,7 @@
           <ul class="slides">
             <li *ngFor="let product of products" >
               <div class="slide-inner">
-                <div class="image"><a href="product.html"><img src="assets/image/product/samsung_syncmaster_941bw-210x210.jpg" alt="Samsung SyncMaster 941BW" /></a></div>
+                <div class="image"><a href="product.html"><img [src]="'http://127.0.0.1:8000/img/' + product.name" alt="Samsung SyncMaster 941BW" /></a></div>
                 <div class="name"><a href="product.html">{{ product.label }}</a></div>
                 <div class="price"> {{ product.price }} </div>
                 <div class="cart">

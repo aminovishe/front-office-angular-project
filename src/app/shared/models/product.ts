@@ -3,4 +3,5 @@ export class Product {
   label: string;
   quantity: number;
   price: number;
+  name: string;
 }
