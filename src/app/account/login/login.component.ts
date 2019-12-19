@@ -5,7 +5,6 @@ import {NgForm} from '@angular/forms';
 import Swal from 'sweetalert2';
 import {User} from '../../shared/models/user';
 import {UserService} from '../../shared/services/user.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +26,7 @@ export class LoginComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.userService.login(this.user)
       .subscribe(response => {
-        localStorage.setItem('token', response.access_token);
+        localStorage.setItem('token', response['access_token']);
         this.router.navigate(['/']);
         Swal.fire({icon: 'success', title: 'Welcome !!', text: ''});
       });

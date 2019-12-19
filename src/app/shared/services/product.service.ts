@@ -33,10 +33,15 @@ export class ProductService {
 
   /** Buy Product */
   buyProduct (productId, quantity, token) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + token
+      })
+    };
     return this.httpClient.post(this.buyUrl, {
       'productId': productId,
-      'quantity': quantity,
-      'token': token
-    });
+      'quantity': quantity
+    }, httpOptions);
   }
 }
